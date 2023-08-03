@@ -1,20 +1,17 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { addTodo } from "../redux/modules/todo";
-import { RootState } from "../redux/config/configStore";
 
 function AddTodo() {
-  const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
-
-  const todos = useSelector((state: RootState) => state.todos);
+  const [title, setTitle] = useState<string>("");
+  const [contents, setContents] = useState<string>("");
 
   const dispatch = useDispatch();
 
-  const onSubmitHandler = (e: any) => {
-    e.preventDefault();
+  const onSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault(); // e: any라고 썼을 땐 pre~ 자동완성 안됐음.
 
     if (title === "") return;
 

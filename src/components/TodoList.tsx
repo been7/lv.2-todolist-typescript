@@ -1,17 +1,19 @@
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodo, toggleTodo } from "../redux/modules/todo";
+import { Todo, deleteTodo, toggleTodo } from "../redux/modules/todo";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../redux/config/configStore";
 
-interface Todo {
+interface TodoListProps {
   type: string;
   name: string;
 }
 
-function TodoList(props: Todo) {
+function TodoList(props: TodoListProps) {
   const navigate = useNavigate();
-  const todos = useSelector((state: RootState) => state.todos);
+  const todos = useSelector<RootState, Array<Todo>>((state) => state.todos);
+  // const todos:Array<Todo2> = useSelector((state:RootState) => state.todos);
+
   const dispatch = useDispatch();
 
   return (

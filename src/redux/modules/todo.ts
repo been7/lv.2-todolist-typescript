@@ -1,5 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 
+export type Todo = {
+  id: string;
+  title: string;
+  contents: string;
+  isDone: boolean;
+};
+
 // Action value
 const ADD_TODO = "ADD_TODO" as const;
 const DEL_TODO = "DEL_TODO" as const;
@@ -28,28 +35,9 @@ export const toggleTodo = (payload: Todo["id"]) => {
 };
 
 type TodoAction =
-  | ReturnType<typeof addTodo>
+  | ReturnType<typeof addTodo> // 이 함수의 리턴타입을 알려준다.
   | ReturnType<typeof deleteTodo>
   | ReturnType<typeof toggleTodo>;
-
-// interface TodoAction {
-//   type: "ADD_TODO" | "DEL_TODO" | "TOGGLE_TODO";
-//   payload: Todo | string;
-// }
-
-export type Todo = {
-  id: string;
-  title: string;
-  contents: string;
-  isDone: boolean;
-};
-
-// export interface Todo {
-//   id: string;
-//   title: string;
-//   contents: string;
-//   isDone: boolean;
-// }
 
 type TodoState = Todo[];
 
@@ -92,3 +80,21 @@ const todos = (
 };
 
 export default todos;
+
+// type TodoAction =
+//   | { type: "ADD_TODO"; payload: Todo }
+//   | { type: "DEL_TODO"; payload: string }
+//   | { type: "TOGGLE_TODO"; payload: string };
+
+// interface TodoAction { // 인터페이스에서 or / and 못쓴다.
+//   // type: typeof addTodo | "DEL_TODO" | "TOGGLE_TODO";
+//   type: "ADD_TODO" | "DEL_TODO" | "TOGGLE_TODO";
+//   payload: Todo | string;
+// }
+
+// export interface Todo {
+//   id: string;
+//   title: string;
+//   contents: string;
+//   isDone: boolean;
+// }

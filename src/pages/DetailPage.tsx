@@ -2,14 +2,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../redux/config/configStore";
+import { Todo } from "../redux/modules/todo";
 
 function DetailPage() {
   const navigate = useNavigate();
   const params = useParams();
   const todos = useSelector((state: RootState) => state.todos);
 
-  const foundTodo = todos.find((item: any) => {
-    return item.id === params.id;
+  // 자동완성 쓰려면 타입 꼭 써줘야함! 휴먼에러 방지..
+  const foundTodo = todos.find((item: Todo) => {
+    return item.id === params.id; // 마우스 올렸을 때 타입추론 못하면 타입 써주기..
   });
 
   if (!foundTodo) {
